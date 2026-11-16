@@ -150,19 +150,19 @@
     <!-- HERO -->
     <div class="hero">
       <div>
-        <span class="pill">🔥 Versi 1.0 • Gratis &amp; Ringan (~5 MB)</span>
+        <span class="pill">🔥 Versi 1.0 • Gratis &amp; Ringan (~5.9 MB)</span>
         <h1>Mainkan <span>Stickman Basket</span> dengan Fisika Realistis!</h1>
         <p>
           Rasakan sensasi menembak bola basket yang nyata: animasi ambil &amp; lempar bola,
           Power Shoot, Mode Level Bertahap, hingga Kontes 3-Point 60 detik dengan Money Ball.
         </p>
         <div class="hero-actions">
-          <button class="btn-primary" id="btnDownloadPlay">▶ Unduh di Google Play</button>
+          <button class="btn-primary" id="btnDownloadPlay">▶ Unduh APK (v1.0 • 5.9 MB)</button>
           <a class="btn-ghost" href="#ulasan">⭐ Beri Rating &amp; Ulasan</a>
         </div>
         <div class="hero-badges">
           <span>Rating: <b id="heroRating">5.0 ★</b></span>
-          <span>Ukuran: <b>~5 MB</b></span>
+          <span>Total Unduhan: <b id="heroDownloads">0</b></span>
           <span>Perangkat Anda: <b id="userDeviceBadge">Mendeteksi...</b></span>
         </div>
       </div>
@@ -205,12 +205,12 @@
 
     <!-- ANALITIK PENGUNJUNG & KLIK UNDUHAN -->
     <section id="analitik">
-      <h2 class="sec-title">📊 Analitik Pengunjung &amp; Pengunduh Web</h2>
-      <p class="sec-sub">Memantau klik tombol unduh, jenis perangkat pengunjung, serta konversi halaman ini. (Untuk data instalasi resmi Play Store, lihat Google Play Console).</p>
+      <h2 class="sec-title">📊 Analitik Pengunjung &amp; Unduhan APK</h2>
+      <p class="sec-sub">Angka "Unduhan Global" diambil otomatis dari GitHub Releases, sedangkan log kunjungan mencatat perangkat pengunjung.</p>
 
       <div class="stats-row">
-        <div class="stat-card"><div class="lbl">Kunjungan Halaman</div><div class="num" id="stViews">0</div></div>
-        <div class="stat-card"><div class="lbl">Klik Unduh</div><div class="num" id="stClicks">0</div></div>
+        <div class="stat-card"><div class="lbl">Unduhan APK (Global)</div><div class="num" id="stGlobalDownloads">0</div></div>
+        <div class="stat-card"><div class="lbl">Kunjungan Sesi Ini</div><div class="num" id="stViews">0</div></div>
         <div class="stat-card"><div class="lbl">Pengunjung Android</div><div class="num" id="stAndroid">0</div></div>
         <div class="stat-card"><div class="lbl">Pengunjung Desktop</div><div class="num" id="stDesktop">0</div></div>
       </div>
@@ -257,7 +257,7 @@
       </div>
     </section>
 
-    <!-- PRIVACY POLICY (UNTUK SYARAT PLAY STORE) -->
+    <!-- PRIVACY POLICY -->
     <section id="privacy">
       <h2 class="sec-title">🔒 Kebijakan Privasi (Privacy Policy)</h2>
       <p class="sec-sub">Terakhir diperbarui: 2026 • Pengembang: Fvamous</p>
@@ -266,7 +266,7 @@
         <p>1. <b>Pengumpulan Data:</b> Aplikasi tidak mengumpulkan, meminta, menyimpan, atau membagikan data pribadi pengguna (seperti nama, email, lokasi, kontak, atau foto) ke server eksternal mana pun.</p>
         <p>2. <b>Penyimpanan Lokal:</b> Skor tertinggi, koin permainan, statistik akurasi, dan pilihan kostum hanya disimpan secara lokal di dalam perangkat Anda menggunakan penyimpanan internal aplikasi.</p>
         <p>3. <b>Izin Perangkat:</b> Aplikasi tidak menggunakan izin sensitif (kamera, mikrofon, lokasi, atau penyimpanan eksternal).</p>
-        <p>4. <b>Kontak:</b> Jika ada pertanyaan terkait kebijakan privasi ini, hubungi pengembang melalui halaman resmi aplikasi di Google Play Store.</p>
+        <p>4. <b>Kontak:</b> Jika ada pertanyaan terkait kebijakan privasi ini, hubungi pengembang melalui halaman resmi aplikasi.</p>
       </div>
     </section>
   </div>
@@ -277,13 +277,10 @@
 
   <script>
     (() => {
-      // ============================================================
-      // KONFIGURASI:
-      // 1. Isi PLAY_STORE_URL dengan link aplikasi Anda setelah terbit di Play Store
-      // 2. (Opsional) Isi GA4_ID dengan Measurement ID Google Analytics 4 Anda (contoh: 'G-ABC123XYZ')
-      // ============================================================
-      const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.fvamous.stickmanbasket';
-      const GA4_ID = '';
+      // Link langsung APK GitHub Release v1.0
+      const DOWNLOAD_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v1.0/app-debug.apk';
+      const GITHUB_API_RELEASES = 'https://api.github.com/repos/fvamous/stickman-basket-web/releases';
+      const GA4_ID = ''; // Opsional: isi ID Google Analytics 4 ('G-XXXXXXXXXX')
 
       if (GA4_ID) {
         const s = document.createElement('script');
@@ -295,6 +292,23 @@
         window.gtag('js', new Date());
         window.gtag('config', GA4_ID);
       }
+
+      // Ambil total unduhan APK asli secara global dari GitHub Releases API
+      fetch(GITHUB_API_RELEASES)
+        .then(r => r.ok ? r.json() : [])
+        .then(releases => {
+          let totalDownloads = 0;
+          if (Array.isArray(releases)) {
+            releases.forEach(rel => {
+              (rel.assets || []).forEach(a => {
+                totalDownloads += (a.download_count || 0);
+              });
+            });
+          }
+          document.getElementById('stGlobalDownloads').textContent = totalDownloads;
+          document.getElementById('heroDownloads').textContent = totalDownloads;
+        })
+        .catch(() => {});
 
       // Deteksi Perangkat
       function detectDevice() {
@@ -308,7 +322,6 @@
       const dev = detectDevice();
       document.getElementById('userDeviceBadge').textContent = dev.label;
 
-      // Analitik Lokal + Log Klik
       const analytics = JSON.parse(localStorage.getItem('sb_lp_analytics') || 'null') || {
         views: 0, clicks: 0, android: 0, desktop: 0, logs: []
       };
@@ -318,8 +331,9 @@
 
       function addLog(action) {
         const now = new Date().toLocaleString('id-ID', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' });
-        const ref = document.referrer ? new URL(document.referrer).hostname : 'Langsung';
-        analytics.logs.unshift({ time: now, action, device: dev.label, source: ref });
+        let source = 'Langsung';
+        try { if (document.referrer) source = new URL(document.referrer).hostname; } catch (_) {}
+        analytics.logs.unshift({ time: now, action, device: dev.label, source });
         if (analytics.logs.length > 8) analytics.logs.pop();
         localStorage.setItem('sb_lp_analytics', JSON.stringify(analytics));
         renderAnalytics();
@@ -327,7 +341,6 @@
 
       function renderAnalytics() {
         document.getElementById('stViews').textContent = analytics.views;
-        document.getElementById('stClicks').textContent = analytics.clicks;
         document.getElementById('stAndroid').textContent = analytics.android;
         document.getElementById('stDesktop').textContent = analytics.desktop;
         const tbody = document.getElementById('logBody');
@@ -339,9 +352,9 @@
 
       document.getElementById('btnDownloadPlay').onclick = () => {
         analytics.clicks++;
-        addLog('Klik Unduh Game');
+        addLog('Klik Unduh APK');
         if (window.gtag) window.gtag('event', 'download_click', { device: dev.label });
-        window.open(PLAY_STORE_URL, '_blank', 'noopener');
+        window.location.href = DOWNLOAD_URL;
       };
 
       // Sistem Rating & Ulasan
