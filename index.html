@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stickman Basket — Game Basket Realistis Android</title>
+  <style>
+    :root {
+      --bg: #08090c;
+      --card: #12141a;
+      --border: rgba(255, 255, 255, 0.11);
+      --gold: #ffd54f;
+      --orange: #ea7124;
+      --text: #f5f5f5;
+      --muted: #9da3ae;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(circle at 50% 0%, #1a150e 0%, var(--bg) 55%);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(8, 9, 12, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: 0.8px; color: var(--gold); }
+    .nav-links { display: flex; gap: 18px; font-size: 13px; color: var(--muted); }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      padding: 58px 0 44px;
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
+    }
+    @media (max-width: 780px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 38px; }
+      .hero-actions, .hero-badges { justify-content: center; }
+    }
+    .pill {
+      display: inline-block; padding: 5px 12px; border-radius: 99px;
+      background: rgba(255, 213, 79, 0.12); border: 1px solid rgba(255, 213, 79, 0.35);
+      color: var(--gold); font-size: 12px; font-weight: 700; margin-bottom: 14px;
+    }
+    h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 900; line-height: 1.12; margin-bottom: 14px; }
+    h1 span { color: var(--gold); }
+    .hero p { color: var(--muted); font-size: 15px; margin-bottom: 24px; max-width: 540px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+    .btn-primary {
+      background: linear-gradient(135deg, #ff9800, #ffd54f);
+      color: #111; font-weight: 800; padding: 13px 22px; border-radius: 12px;
+      border: none; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 8px 24px rgba(255, 179, 0, 0.25);
+    }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border);
+      color: #fff; font-weight: 600; padding: 13px 18px; border-radius: 12px; font-size: 14px;
+    }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--muted); }
+    .hero-badges b { color: #fff; }
+
+    .hero-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 22px;
+      padding: 28px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .icon-svg { width: 110px; height: 110px; margin-bottom: 14px; filter: drop-shadow(0 0 18px rgba(234, 113, 36, 0.35)); }
+
+    /* SECTION */
+    section { padding: 42px 0; border-top: 1px solid var(--border); }
+    .sec-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .sec-sub { color: var(--muted); font-size: 13px; margin-bottom: 22px; }
+
+    /* FITUR */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
+    }
+    .card h3 { font-size: 15px; margin-bottom: 6px; color: var(--gold); }
+    .card p { font-size: 13px; color: var(--muted); }
+
+    /* ANALITIK UNDUHAN */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
+    }
+    .stat-card .lbl { font-size: 11px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.6px; }
+    .stat-card .num { font-size: 26px; font-weight: 900; color: var(--gold); margin-top: 4px; }
+    .log-table {
+      width: 100%; border-collapse: collapse; font-size: 12px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .log-table th, .log-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    .log-table th { color: var(--muted); font-weight: 600; background: rgba(255,255,255,0.03); }
+
+    /* RATING & REVIEW */
+    .review-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
+    @media (max-width: 780px) { .review-layout { grid-template-columns: 1fr; } }
+    .rating-big { font-size: 44px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; margin: 6px 0; }
+    .bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--gold); border-radius: 99px; }
+
+    .star-picker { display: flex; gap: 6px; margin: 8px 0 12px; }
+    .star-btn {
+      font-size: 24px; background: none; border: none; cursor: pointer; color: #444; transition: transform 0.1s;
+    }
+    .star-btn.on { color: var(--gold); }
+    .star-btn:hover { transform: scale(1.15); }
+    input, textarea {
+      width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: #fff; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-bottom: 10px; font-family: inherit;
+    }
+    .review-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 10px;
+    }
+    .review-head { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+    .review-stars { color: var(--gold); font-size: 13px; }
+    .review-date { color: var(--muted); font-size: 11px; }
+
+    footer { padding: 32px 0; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">🏀 STICKMAN BASKET</div>
+      <div class="nav-links">
+        <a href="#fitur">Fitur</a>
+        <a href="#analitik">Analitik</a>
+        <a href="#ulasan">Rating &amp; Ulasan</a>
+        <a href="#privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- HERO -->
+    <div class="hero">
+      <div>
+        <span class="pill">🔥 Versi 1.0 • Gratis &amp; Ringan (~5 MB)</span>
+        <h1>Mainkan <span>Stickman Basket</span> dengan Fisika Realistis!</h1>
+        <p>
+          Rasakan sensasi menembak bola basket yang nyata: animasi ambil &amp; lempar bola,
+          Power Shoot, Mode Level Bertahap, hingga Kontes 3-Point 60 detik dengan Money Ball.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" id="btnDownloadPlay">▶ Unduh di Google Play</button>
+          <a class="btn-ghost" href="#ulasan">⭐ Beri Rating &amp; Ulasan</a>
+        </div>
+        <div class="hero-badges">
+          <span>Rating: <b id="heroRating">5.0 ★</b></span>
+          <span>Ukuran: <b>~5 MB</b></span>
+          <span>Perangkat Anda: <b id="userDeviceBadge">Mendeteksi...</b></span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <svg class="icon-svg" viewBox="0 0 108 108" xmlns="http://www.w3.org/2000/svg">
+          <rect width="108" height="108" rx="24" fill="#000000"/>
+          <defs><clipPath id="ballClip"><circle cx="54" cy="54" r="28"/></clipPath></defs>
+          <g clip-path="url(#ballClip)">
+            <circle cx="54" cy="54" r="28" fill="#D25B17"/>
+            <circle cx="50.5" cy="50.5" r="27.5" fill="#EA7124"/>
+            <path d="M25,54 L83,54 M54,25 Q35,54 54,83 M31,37 Q44,50 75,34.5 M31,71 Q44,58 75,73.5" stroke="#0D131A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <circle cx="54" cy="54" r="28.5" fill="none" stroke="#0D131A" stroke-width="2.8"/>
+        </svg>
+        <h3 style="margin-bottom:4px;">Stickman Basket</h3>
+        <p style="font-size:12px; color:var(--muted);">com.fvamous.stickmanbasket</p>
+      </div>
+    </div>
+
+    <!-- FITUR -->
+    <section id="fitur">
+      <h2 class="sec-title">Fitur Unggulan</h2>
+      <p class="sec-sub">Dirancang realistis seperti latihan &amp; kontes menembak basket sungguhan.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>🎯 3 Mode Permainan</h3>
+          <p>Mode Level Drills (Paint → 3-Point → Shot Clock), Kontes 3-Point 60 Detik + Money Ball, dan Latihan Bebas.</p>
+        </div>
+        <div class="card">
+          <h3>🔥 Power Shoot &amp; Fisika Nyata</h3>
+          <p>Indikator Sweet Spot dinamis mengikuti jarak tembak, jaring ring berayun, pantulan papan kaca &amp; LED buzzer.</p>
+        </div>
+        <div class="card">
+          <h3>🔊 Audio Indoor &amp; Backsound</h3>
+          <p>Suara pantulan bola kulit di lantai kayu, denting ring besi, sorak penonton saat Swish, plus beat Streetball.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANALITIK PENGUNJUNG & KLIK UNDUHAN -->
+    <section id="analitik">
+      <h2 class="sec-title">📊 Analitik Pengunjung &amp; Pengunduh Web</h2>
+      <p class="sec-sub">Memantau klik tombol unduh, jenis perangkat pengunjung, serta konversi halaman ini. (Untuk data instalasi resmi Play Store, lihat Google Play Console).</p>
+
+      <div class="stats-row">
+        <div class="stat-card"><div class="lbl">Kunjungan Halaman</div><div class="num" id="stViews">0</div></div>
+        <div class="stat-card"><div class="lbl">Klik Unduh</div><div class="num" id="stClicks">0</div></div>
+        <div class="stat-card"><div class="lbl">Pengunjung Android</div><div class="num" id="stAndroid">0</div></div>
+        <div class="stat-card"><div class="lbl">Pengunjung Desktop</div><div class="num" id="stDesktop">0</div></div>
+      </div>
+
+      <table class="log-table">
+        <thead>
+          <tr><th>Waktu</th><th>Aksi</th><th>Perangkat / OS</th><th>Sumber</th></tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+    </section>
+
+    <!-- RATING & REVIEW -->
+    <section id="ulasan">
+      <h2 class="sec-title">⭐ Rating &amp; Ulasan Pemain</h2>
+      <p class="sec-sub">Lihat pendapat pemain atau tulis ulasan Anda sendiri.</p>
+
+      <div class="review-layout">
+        <div class="card">
+          <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px;">
+            <div class="rating-big" id="avgRating">5.0</div>
+            <div>
+              <div id="avgStars" style="color:var(--gold); font-size:18px;">★★★★★</div>
+              <div style="font-size:12px; color:var(--muted);" id="totalReviewsText">0 ulasan</div>
+            </div>
+          </div>
+          <div id="ratingBars"></div>
+
+          <hr style="border:none; border-top:1px solid var(--border); margin:16px 0;" />
+          <h3 style="margin-bottom:6px;">Tulis Ulasan Anda</h3>
+          <div class="star-picker" id="starPicker">
+            <button type="button" class="star-btn on" data-v="1">★</button>
+            <button type="button" class="star-btn on" data-v="2">★</button>
+            <button type="button" class="star-btn on" data-v="3">★</button>
+            <button type="button" class="star-btn on" data-v="4">★</button>
+            <button type="button" class="star-btn on" data-v="5">★</button>
+          </div>
+          <input type="text" id="revName" placeholder="Nama Anda (misal: Andi)" maxlength="30" />
+          <textarea id="revText" rows="3" placeholder="Bagikan pengalaman bermain Stickman Basket..." maxlength="240"></textarea>
+          <button class="btn-primary" id="btnSubmitReview" style="width:100%; justify-content:center;">Kirim Ulasan</button>
+        </div>
+
+        <div id="reviewList"></div>
+      </div>
+    </section>
+
+    <!-- PRIVACY POLICY (UNTUK SYARAT PLAY STORE) -->
+    <section id="privacy">
+      <h2 class="sec-title">🔒 Kebijakan Privasi (Privacy Policy)</h2>
+      <p class="sec-sub">Terakhir diperbarui: 2026 • Pengembang: Fvamous</p>
+      <div class="card" style="font-size:13px; color:var(--muted); display:flex; flex-direction:column; gap:8px;">
+        <p>Aplikasi game <b>Stickman Basket</b> (<code>com.fvamous.stickmanbasket</code>) dapat dimainkan sepenuhnya secara offline.</p>
+        <p>1. <b>Pengumpulan Data:</b> Aplikasi tidak mengumpulkan, meminta, menyimpan, atau membagikan data pribadi pengguna (seperti nama, email, lokasi, kontak, atau foto) ke server eksternal mana pun.</p>
+        <p>2. <b>Penyimpanan Lokal:</b> Skor tertinggi, koin permainan, statistik akurasi, dan pilihan kostum hanya disimpan secara lokal di dalam perangkat Anda menggunakan penyimpanan internal aplikasi.</p>
+        <p>3. <b>Izin Perangkat:</b> Aplikasi tidak menggunakan izin sensitif (kamera, mikrofon, lokasi, atau penyimpanan eksternal).</p>
+        <p>4. <b>Kontak:</b> Jika ada pertanyaan terkait kebijakan privasi ini, hubungi pengembang melalui halaman resmi aplikasi di Google Play Store.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">© 2026 Stickman Basket • Fvamous Studio</div>
+  </footer>
+
+  <script>
+    (() => {
+      // ============================================================
+      // KONFIGURASI:
+      // 1. Isi PLAY_STORE_URL dengan link aplikasi Anda setelah terbit di Play Store
+      // 2. (Opsional) Isi GA4_ID dengan Measurement ID Google Analytics 4 Anda (contoh: 'G-ABC123XYZ')
+      // ============================================================
+      const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.fvamous.stickmanbasket';
+      const GA4_ID = '';
+
+      if (GA4_ID) {
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){ window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA4_ID);
+      }
+
+      // Deteksi Perangkat
+      function detectDevice() {
+        const ua = navigator.userAgent || '';
+        if (/android/i.test(ua)) return { type: 'android', label: 'Android' };
+        if (/iPad|iPhone|iPod/.test(ua)) return { type: 'ios', label: 'iOS' };
+        if (/Windows/i.test(ua)) return { type: 'desktop', label: 'Windows PC' };
+        if (/Mac/i.test(ua)) return { type: 'desktop', label: 'Mac' };
+        return { type: 'desktop', label: 'Desktop/Lainnya' };
+      }
+      const dev = detectDevice();
+      document.getElementById('userDeviceBadge').textContent = dev.label;
+
+      // Analitik Lokal + Log Klik
+      const analytics = JSON.parse(localStorage.getItem('sb_lp_analytics') || 'null') || {
+        views: 0, clicks: 0, android: 0, desktop: 0, logs: []
+      };
+      analytics.views++;
+      if (dev.type === 'android') analytics.android++;
+      else analytics.desktop++;
+
+      function addLog(action) {
+        const now = new Date().toLocaleString('id-ID', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' });
+        const ref = document.referrer ? new URL(document.referrer).hostname : 'Langsung';
+        analytics.logs.unshift({ time: now, action, device: dev.label, source: ref });
+        if (analytics.logs.length > 8) analytics.logs.pop();
+        localStorage.setItem('sb_lp_analytics', JSON.stringify(analytics));
+        renderAnalytics();
+      }
+
+      function renderAnalytics() {
+        document.getElementById('stViews').textContent = analytics.views;
+        document.getElementById('stClicks').textContent = analytics.clicks;
+        document.getElementById('stAndroid').textContent = analytics.android;
+        document.getElementById('stDesktop').textContent = analytics.desktop;
+        const tbody = document.getElementById('logBody');
+        tbody.innerHTML = analytics.logs.map(l =>
+          `<tr><td>${l.time}</td><td>${l.action}</td><td>${l.device}</td><td>${l.source}</td></tr>`
+        ).join('');
+      }
+      addLog('Kunjungan Halaman');
+
+      document.getElementById('btnDownloadPlay').onclick = () => {
+        analytics.clicks++;
+        addLog('Klik Unduh Game');
+        if (window.gtag) window.gtag('event', 'download_click', { device: dev.label });
+        window.open(PLAY_STORE_URL, '_blank', 'noopener');
+      };
+
+      // Sistem Rating & Ulasan
+      const defaultReviews = [
+        { name: 'Rizky Pratama', stars: 5, text: 'Fisika lemparannya realistis, suara pantulan bolanya terasa nyata banget!', date: 'Baru saja' },
+        { name: 'Dimas A.', stars: 5, text: 'Mode 3-Point Contest dan Power Shoot-nya seru, ringan di HP Android.', date: 'Hari ini' }
+      ];
+      let reviews = JSON.parse(localStorage.getItem('sb_lp_reviews') || 'null') || defaultReviews;
+      let pickedStars = 5;
+
+      const starBtns = document.querySelectorAll('.star-btn');
+      starBtns.forEach(btn => {
+        btn.onclick = () => {
+          pickedStars = parseInt(btn.dataset.v, 10);
+          starBtns.forEach(b => b.classList.toggle('on', parseInt(b.dataset.v, 10) <= pickedStars));
+        };
+      });
+
+      function renderReviews() {
+        const total = reviews.length;
+        const sum = reviews.reduce((a, r) => a + r.stars, 0);
+        const avg = total ? (sum / total).toFixed(1) : '5.0';
+
+        document.getElementById('avgRating').textContent = avg;
+        document.getElementById('heroRating').textContent = `${avg} ★`;
+        document.getElementById('totalReviewsText').textContent = `${total} ulasan`;
+
+        const bars = document.getElementById('ratingBars');
+        bars.innerHTML = '';
+        for (let s = 5; s >= 1; s--) {
+          const cnt = reviews.filter(r => r.stars === s).length;
+          const pct = total ? Math.round((cnt / total) * 100) : 0;
+          bars.innerHTML += `
+            <div class="bar-row">
+              <span style="width:24px;">${s}★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+              <span style="width:28px; text-align:right; color:var(--muted);">${cnt}</span>
+            </div>
+          `;
+        }
+
+        const list = document.getElementById('reviewList');
+        list.innerHTML = reviews.map(r => `
+          <div class="review-item">
+            <div class="review-head">
+              <strong>${r.name.replace(/</g, '&lt;')}</strong>
+              <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span>
+            </div>
+            <p style="font-size:13px; color:#ddd; margin-bottom:4px;">${r.text.replace(/</g, '&lt;')}</p>
+            <div class="review-date">${r.date}</div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('btnSubmitReview').onclick = () => {
+        const name = document.getElementById('revName').value.trim() || 'Pemain';
+        const text = document.getElementById('revText').value.trim();
+        if (!text) return alert('Silakan tulis ulasan singkat terlebih dahulu.');
+        const now = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+        reviews.unshift({ name, stars: pickedStars, text, date: now });
+        localStorage.setItem('sb_lp_reviews', JSON.stringify(reviews));
+        document.getElementById('revName').value = '';
+        document.getElementById('revText').value = '';
+        if (window.gtag) window.gtag('event', 'submit_review', { stars: pickedStars });
+        renderReviews();
+      };
+
+      renderReviews();
+    })();
+  </script>
+</body>
+</html>
