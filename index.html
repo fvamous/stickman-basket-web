@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>Stickman Basket — Game Basket Realistis Android &amp; PC</title>
   <style>
     :root {
@@ -26,7 +27,7 @@
 
     nav {
       position: sticky; top: 0; z-index: 30;
-      background: rgba(8, 9, 12, 0.85);
+      background: rgba(8, 9, 12, 0.88);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
@@ -146,7 +147,7 @@
           <a class="btn-ghost" href="#ulasan">⭐ Ulasan</a>
         </div>
         <div class="hero-badges">
-          <span>Rating: <b id="heroRating">- ★</b></span>
+          <span>Rating: <b id="heroRating">Baru ★</b></span>
           <span>Total Unduhan: <b id="heroDownloads">0</b></span>
           <span>Perangkat Anda: <b id="userDeviceBadge">Mendeteksi...</b></span>
         </div>
@@ -263,7 +264,6 @@
   <script>
     (() => {
       const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzHyI93KUXeZPnRrqe8pYgNvsdJE7ByUbq0trMZPJXz6OBW1gTTZrR6eo1xPaltHyaN/exec';
-
       const DOWNLOAD_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v2.1/app-debug.apk';
       const DOWNLOAD_PC_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v2.1/StickmanBasket-PC-v2.1.zip';
       const GITHUB_API_RELEASES = 'https://api.github.com/repos/fvamous/stickman-basket-web/releases';
@@ -284,13 +284,15 @@
 
       async function sendToSheet(payload) {
         try {
-          await fetch(SHEET_API_URL, {
+          const res = await fetch(SHEET_API_URL, {
             method: 'POST',
-            keepalive: true,
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(payload)
           });
-        } catch (_) {}
+          return res.ok;
+        } catch (_) {
+          return false;
+        }
       }
 
       fetch(GITHUB_API_RELEASES)
@@ -371,7 +373,7 @@
 
       async function loadGlobalData() {
         try {
-          const res = await fetch(SHEET_API_URL);
+          const res = await fetch(SHEET_API_URL + '?t=' + Date.now(), { cache: 'no-store' });
           const data = await res.json();
           if (data && data.ok) {
             reviews = data.reviews || [];
@@ -380,6 +382,7 @@
           }
         } catch (_) {
           renderReviews();
+          renderAnalyticsData({ views: 0, android: 0, desktop: 0, logs: [] });
         }
       }
 
@@ -423,10 +426,14 @@
 
         btnSubmit.disabled = true;
         btnSubmit.textContent = 'Mengirim...';
-        await sendToSheet({ type: 'review', name, stars: pickedStars, text });
-        document.getElementById('revName').value = '';
-        document.getElementById('revText').value = '';
-        await loadGlobalData();
+        const ok = await sendToSheet({ type: 'review', name, stars: pickedStars, text });
+        if (!ok) {
+          alert('Gagal terhubung ke Google Sheets. Pastikan Deploy Apps Script memakai "Who has access: Anyone".');
+        } else {
+          document.getElementById('revName').value = '';
+          document.getElementById('revText').value = '';
+          await loadGlobalData();
+        }
         btnSubmit.disabled = false;
         btnSubmit.textContent = 'Kirim Ulasan';
       };
