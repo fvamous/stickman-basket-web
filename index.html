@@ -10,7 +10,6 @@
       --card: #12141a;
       --border: rgba(255, 255, 255, 0.11);
       --gold: #ffd54f;
-      --orange: #ea7124;
       --text: #f5f5f5;
       --muted: #9da3ae;
     }
@@ -25,22 +24,17 @@
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
 
-    /* NAV */
     nav {
       position: sticky; top: 0; z-index: 30;
       background: rgba(8, 9, 12, 0.85);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 62px;
-    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 62px; }
     .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: 0.8px; color: var(--gold); }
     .nav-links { display: flex; gap: 18px; font-size: 13px; color: var(--muted); }
     .nav-links a:hover { color: var(--gold); }
 
-    /* HERO */
     .hero {
       padding: 58px 0 44px;
       display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
@@ -64,6 +58,7 @@
       border: none; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
       box-shadow: 0 8px 24px rgba(255, 179, 0, 0.25);
     }
+    .btn-primary:disabled { opacity: 0.6; cursor: wait; }
     .btn-ghost {
       background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border);
       color: #fff; font-weight: 600; padding: 13px 16px; border-radius: 12px; font-size: 14px;
@@ -79,24 +74,17 @@
     }
     .icon-svg { width: 110px; height: 110px; margin-bottom: 14px; filter: drop-shadow(0 0 18px rgba(234, 113, 36, 0.35)); }
 
-    /* SECTION */
     section { padding: 42px 0; border-top: 1px solid var(--border); }
     .sec-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
     .sec-sub { color: var(--muted); font-size: 13px; margin-bottom: 22px; }
 
-    /* FITUR */
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-    .card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
-    }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
     .card h3 { font-size: 15px; margin-bottom: 6px; color: var(--gold); }
     .card p { font-size: 13px; color: var(--muted); }
 
-    /* ANALITIK UNDUHAN */
     .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
-    .stat-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
-    }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
     .stat-card .lbl { font-size: 11px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.6px; }
     .stat-card .num { font-size: 26px; font-weight: 900; color: var(--gold); margin-top: 4px; }
     .log-table {
@@ -106,7 +94,6 @@
     .log-table th, .log-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
     .log-table th { color: var(--muted); font-weight: 600; background: rgba(255,255,255,0.03); }
 
-    /* RATING & REVIEW */
     .review-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
     @media (max-width: 780px) { .review-layout { grid-template-columns: 1fr; } }
     .rating-big { font-size: 44px; font-weight: 900; color: var(--gold); line-height: 1; }
@@ -115,18 +102,14 @@
     .bar-fill { height: 100%; background: var(--gold); border-radius: 99px; }
 
     .star-picker { display: flex; gap: 6px; margin: 8px 0 12px; }
-    .star-btn {
-      font-size: 24px; background: none; border: none; cursor: pointer; color: #444; transition: transform 0.1s;
-    }
+    .star-btn { font-size: 24px; background: none; border: none; cursor: pointer; color: #444; transition: transform 0.1s; }
     .star-btn.on { color: var(--gold); }
     .star-btn:hover { transform: scale(1.15); }
     input, textarea {
       width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
       color: #fff; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-bottom: 10px; font-family: inherit;
     }
-    .review-item {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 10px;
-    }
+    .review-item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 10px; }
     .review-head { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
     .review-stars { color: var(--gold); font-size: 13px; }
     .review-date { color: var(--muted); font-size: 11px; }
@@ -149,7 +132,6 @@
   </nav>
 
   <div class="container">
-    <!-- HERO -->
     <div class="hero">
       <div>
         <span class="pill">🔥 Versi 2.1 • Android &amp; Windows PC • 60 FPS</span>
@@ -164,7 +146,7 @@
           <a class="btn-ghost" href="#ulasan">⭐ Ulasan</a>
         </div>
         <div class="hero-badges">
-          <span>Rating: <b id="heroRating">5.0 ★</b></span>
+          <span>Rating: <b id="heroRating">- ★</b></span>
           <span>Total Unduhan: <b id="heroDownloads">0</b></span>
           <span>Perangkat Anda: <b id="userDeviceBadge">Mendeteksi...</b></span>
         </div>
@@ -186,7 +168,6 @@
       </div>
     </div>
 
-    <!-- FITUR -->
     <section id="fitur">
       <h2 class="sec-title">Pembaruan Unggulan v2.1</h2>
       <p class="sec-sub">Dirancang realistis seperti latihan &amp; kontes menembak basket sungguhan.</p>
@@ -206,14 +187,13 @@
       </div>
     </section>
 
-    <!-- ANALITIK PENGUNJUNG & KLIK UNDUHAN -->
     <section id="analitik">
-      <h2 class="sec-title">📊 Analitik Pengunjung &amp; Unduhan</h2>
-      <p class="sec-sub">Angka "Unduhan Global" diambil otomatis dari GitHub Releases (Android + PC), sedangkan log mencatat kunjungan perangkat.</p>
+      <h2 class="sec-title">📊 Analitik Pengunjung &amp; Unduhan Global</h2>
+      <p class="sec-sub">Data asli tercatat real-time di Google Sheets &amp; GitHub Releases untuk semua pengunjung.</p>
 
       <div class="stats-row">
-        <div class="stat-card"><div class="lbl">Total Unduhan (Global)</div><div class="num" id="stGlobalDownloads">0</div></div>
-        <div class="stat-card"><div class="lbl">Kunjungan Sesi Ini</div><div class="num" id="stViews">0</div></div>
+        <div class="stat-card"><div class="lbl">Total Unduhan APK+PC</div><div class="num" id="stGlobalDownloads">0</div></div>
+        <div class="stat-card"><div class="lbl">Total Kunjungan Global</div><div class="num" id="stViews">0</div></div>
         <div class="stat-card"><div class="lbl">Pengunjung Android</div><div class="num" id="stAndroid">0</div></div>
         <div class="stat-card"><div class="lbl">Pengunjung Desktop</div><div class="num" id="stDesktop">0</div></div>
       </div>
@@ -222,22 +202,23 @@
         <thead>
           <tr><th>Waktu</th><th>Aksi</th><th>Perangkat / OS</th><th>Sumber</th></tr>
         </thead>
-        <tbody id="logBody"></tbody>
+        <tbody id="logBody">
+          <tr><td colspan="4" style="color:var(--muted); text-align:center;">Memuat log terbaru...</td></tr>
+        </tbody>
       </table>
     </section>
 
-    <!-- RATING & REVIEW -->
     <section id="ulasan">
       <h2 class="sec-title">⭐ Rating &amp; Ulasan Pemain</h2>
-      <p class="sec-sub">Lihat pendapat pemain atau tulis ulasan Anda sendiri.</p>
+      <p class="sec-sub">Ulasan asli dari para pemain yang sudah mencoba Stickman Basket.</p>
 
       <div class="review-layout">
         <div class="card">
           <div style="display:flex; align-items:center; gap:16px; margin-bottom:14px;">
-            <div class="rating-big" id="avgRating">5.0</div>
+            <div class="rating-big" id="avgRating">0.0</div>
             <div>
-              <div id="avgStars" style="color:var(--gold); font-size:18px;">★★★★★</div>
-              <div style="font-size:12px; color:var(--muted);" id="totalReviewsText">0 ulasan</div>
+              <div id="avgStars" style="color:var(--gold); font-size:18px;">☆☆☆☆☆</div>
+              <div style="font-size:12px; color:var(--muted);" id="totalReviewsText">Memuat ulasan...</div>
             </div>
           </div>
           <div id="ratingBars"></div>
@@ -251,16 +232,17 @@
             <button type="button" class="star-btn on" data-v="4">★</button>
             <button type="button" class="star-btn on" data-v="5">★</button>
           </div>
-          <input type="text" id="revName" placeholder="Nama Anda (misal: Andi)" maxlength="30" />
-          <textarea id="revText" rows="3" placeholder="Bagikan pengalaman bermain Stickman Basket..." maxlength="240"></textarea>
+          <input type="text" id="revName" placeholder="Nama Anda (misal: Andi)" maxlength="35" />
+          <textarea id="revText" rows="3" placeholder="Bagikan pengalaman bermain Stickman Basket..." maxlength="260"></textarea>
           <button class="btn-primary" id="btnSubmitReview" style="width:100%; justify-content:center;">Kirim Ulasan</button>
         </div>
 
-        <div id="reviewList"></div>
+        <div id="reviewList">
+          <div class="card" style="color:var(--muted); text-align:center;">Memuat ulasan...</div>
+        </div>
       </div>
     </section>
 
-    <!-- PRIVACY POLICY -->
     <section id="privacy">
       <h2 class="sec-title">🔒 Kebijakan Privasi (Privacy Policy)</h2>
       <p class="sec-sub">Terakhir diperbarui: 2026 • Pengembang: Fvamous</p>
@@ -280,41 +262,12 @@
 
   <script>
     (() => {
-      // Link langsung GitHub Release v2.1 (Android & PC)
+      const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzHyI93KUXeZPnRrqe8pYgNvsdJE7ByUbq0trMZPJXz6OBW1gTTZrR6eo1xPaltHyaN/exec';
+
       const DOWNLOAD_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v2.1/app-debug.apk';
       const DOWNLOAD_PC_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v2.1/StickmanBasket-PC-v2.1.zip';
       const GITHUB_API_RELEASES = 'https://api.github.com/repos/fvamous/stickman-basket-web/releases';
-      const GA4_ID = ''; // Opsional: isi ID Google Analytics 4 ('G-XXXXXXXXXX')
 
-      if (GA4_ID) {
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
-        document.head.appendChild(s);
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){ window.dataLayer.push(arguments); };
-        window.gtag('js', new Date());
-        window.gtag('config', GA4_ID);
-      }
-
-      // Ambil total unduhan APK + PC asli secara global dari GitHub Releases API
-      fetch(GITHUB_API_RELEASES)
-        .then(r => r.ok ? r.json() : [])
-        .then(releases => {
-          let totalDownloads = 0;
-          if (Array.isArray(releases)) {
-            releases.forEach(rel => {
-              (rel.assets || []).forEach(a => {
-                totalDownloads += (a.download_count || 0);
-              });
-            });
-          }
-          document.getElementById('stGlobalDownloads').textContent = totalDownloads;
-          document.getElementById('heroDownloads').textContent = totalDownloads;
-        })
-        .catch(() => {});
-
-      // Deteksi Perangkat
       function detectDevice() {
         const ua = navigator.userAgent || '';
         if (/android/i.test(ua)) return { type: 'android', label: 'Android' };
@@ -326,72 +279,49 @@
       const dev = detectDevice();
       document.getElementById('userDeviceBadge').textContent = dev.label;
 
-      const analytics = JSON.parse(localStorage.getItem('sb_lp_analytics') || 'null') || {
-        views: 0, clicks: 0, android: 0, desktop: 0, logs: []
-      };
-      analytics.views++;
-      if (dev.type === 'android') analytics.android++;
-      else analytics.desktop++;
+      let refSource = 'Langsung';
+      try { if (document.referrer) refSource = new URL(document.referrer).hostname; } catch (_) {}
 
-      function addLog(action) {
-        const now = new Date().toLocaleString('id-ID', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: 'short' });
-        let source = 'Langsung';
-        try { if (document.referrer) source = new URL(document.referrer).hostname; } catch (_) {}
-        analytics.logs.unshift({ time: now, action, device: dev.label, source });
-        if (analytics.logs.length > 8) analytics.logs.pop();
-        localStorage.setItem('sb_lp_analytics', JSON.stringify(analytics));
-        renderAnalytics();
+      async function sendToSheet(payload) {
+        try {
+          await fetch(SHEET_API_URL, {
+            method: 'POST',
+            keepalive: true,
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } catch (_) {}
       }
 
-      function renderAnalytics() {
-        document.getElementById('stViews').textContent = analytics.views;
-        document.getElementById('stAndroid').textContent = analytics.android;
-        document.getElementById('stDesktop').textContent = analytics.desktop;
-        const tbody = document.getElementById('logBody');
-        tbody.innerHTML = analytics.logs.map(l =>
-          `<tr><td>${l.time}</td><td>${l.action}</td><td>${l.device}</td><td>${l.source}</td></tr>`
-        ).join('');
-      }
-      addLog('Kunjungan Halaman');
+      fetch(GITHUB_API_RELEASES)
+        .then(r => r.ok ? r.json() : [])
+        .then(releases => {
+          let totalDownloads = 0;
+          if (Array.isArray(releases)) {
+            releases.forEach(rel => (rel.assets || []).forEach(a => totalDownloads += (a.download_count || 0)));
+          }
+          document.getElementById('stGlobalDownloads').textContent = totalDownloads;
+          document.getElementById('heroDownloads').textContent = totalDownloads;
+        })
+        .catch(() => {});
 
-      document.getElementById('btnDownloadPlay').onclick = () => {
-        analytics.clicks++;
-        addLog('Klik Unduh APK');
-        if (window.gtag) window.gtag('event', 'download_click', { device: dev.label });
-        window.location.href = DOWNLOAD_URL;
-      };
-
-      document.getElementById('btnDownloadPC').onclick = () => {
-        analytics.clicks++;
-        addLog('Klik Unduh PC (.zip)');
-        if (window.gtag) window.gtag('event', 'download_pc_click', { device: dev.label });
-        window.location.href = DOWNLOAD_PC_URL;
-      };
-
-      // Sistem Rating & Ulasan
-      const defaultReviews = [
-        { name: 'Rizky Pratama', stars: 5, text: 'Fisika lemparannya realistis, suara pantulan bolanya terasa nyata banget!', date: 'Baru saja' },
-        { name: 'Dimas A.', stars: 5, text: 'Update v2.1 makin mulus 60 FPS di HP dan ada penjaganya yang menantang!', date: 'Hari ini' }
-      ];
-      let reviews = JSON.parse(localStorage.getItem('sb_lp_reviews') || 'null') || defaultReviews;
+      let reviews = [];
       let pickedStars = 5;
 
-      const starBtns = document.querySelectorAll('.star-btn');
-      starBtns.forEach(btn => {
-        btn.onclick = () => {
-          pickedStars = parseInt(btn.dataset.v, 10);
-          starBtns.forEach(b => b.classList.toggle('on', parseInt(b.dataset.v, 10) <= pickedStars));
-        };
-      });
+      function esc(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
 
       function renderReviews() {
         const total = reviews.length;
         const sum = reviews.reduce((a, r) => a + r.stars, 0);
-        const avg = total ? (sum / total).toFixed(1) : '5.0';
+        const avg = total ? (sum / total).toFixed(1) : '0.0';
+        const fullStars = total ? Math.round(sum / total) : 0;
 
         document.getElementById('avgRating').textContent = avg;
-        document.getElementById('heroRating').textContent = `${avg} ★`;
-        document.getElementById('totalReviewsText').textContent = `${total} ulasan`;
+        document.getElementById('avgStars').textContent = '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
+        document.getElementById('heroRating').textContent = total ? `${avg} ★` : 'Baru ★';
+        document.getElementById('totalReviewsText').textContent = `${total} ulasan asli`;
 
         const bars = document.getElementById('ratingBars');
         bars.innerHTML = '';
@@ -408,32 +338,98 @@
         }
 
         const list = document.getElementById('reviewList');
-        list.innerHTML = reviews.map(r => `
-          <div class="review-item">
-            <div class="review-head">
-              <strong>${r.name.replace(/</g, '&lt;')}</strong>
-              <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span>
+        if (total === 0) {
+          list.innerHTML = `<div class="card" style="color:var(--muted); text-align:center;">Belum ada ulasan. Jadilah yang pertama memberi ulasan!</div>`;
+        } else {
+          list.innerHTML = reviews.map(r => `
+            <div class="review-item">
+              <div class="review-head">
+                <strong>${esc(r.name)}</strong>
+                <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span>
+              </div>
+              <p style="font-size:13px; color:#ddd; margin-bottom:4px;">${esc(r.text)}</p>
+              <div class="review-date">${esc(r.date)}</div>
             </div>
-            <p style="font-size:13px; color:#ddd; margin-bottom:4px;">${r.text.replace(/</g, '&lt;')}</p>
-            <div class="review-date">${r.date}</div>
-          </div>
-        `).join('');
+          `).join('');
+        }
       }
 
-      document.getElementById('btnSubmitReview').onclick = () => {
+      function renderAnalyticsData(ana) {
+        document.getElementById('stViews').textContent = ana.views || 0;
+        document.getElementById('stAndroid').textContent = ana.android || 0;
+        document.getElementById('stDesktop').textContent = ana.desktop || 0;
+        const tbody = document.getElementById('logBody');
+        const logs = ana.logs || [];
+        if (!logs.length) {
+          tbody.innerHTML = `<tr><td colspan="4" style="color:var(--muted); text-align:center;">Belum ada aktivitas tercatat.</td></tr>`;
+        } else {
+          tbody.innerHTML = logs.map(l =>
+            `<tr><td>${esc(l.time)}</td><td>${esc(l.action)}</td><td>${esc(l.device)}</td><td>${esc(l.source)}</td></tr>`
+          ).join('');
+        }
+      }
+
+      async function loadGlobalData() {
+        try {
+          const res = await fetch(SHEET_API_URL);
+          const data = await res.json();
+          if (data && data.ok) {
+            reviews = data.reviews || [];
+            renderReviews();
+            renderAnalyticsData(data.analytics || {});
+          }
+        } catch (_) {
+          renderReviews();
+        }
+      }
+
+      if (!sessionStorage.getItem('sb_lp_visited')) {
+        sessionStorage.setItem('sb_lp_visited', '1');
+        sendToSheet({ type: 'event', action: 'Kunjungan Halaman', device: dev.label, source: refSource })
+          .then(() => loadGlobalData());
+      } else {
+        loadGlobalData();
+      }
+
+      document.getElementById('btnDownloadPlay').onclick = async () => {
+        await Promise.race([
+          sendToSheet({ type: 'event', action: 'Unduh APK (Android)', device: dev.label, source: refSource }),
+          new Promise(r => setTimeout(r, 900))
+        ]);
+        window.location.href = DOWNLOAD_URL;
+      };
+
+      document.getElementById('btnDownloadPC').onclick = async () => {
+        await Promise.race([
+          sendToSheet({ type: 'event', action: 'Unduh PC (.zip)', device: dev.label, source: refSource }),
+          new Promise(r => setTimeout(r, 900))
+        ]);
+        window.location.href = DOWNLOAD_PC_URL;
+      };
+
+      const starBtns = document.querySelectorAll('.star-btn');
+      starBtns.forEach(btn => {
+        btn.onclick = () => {
+          pickedStars = parseInt(btn.dataset.v, 10);
+          starBtns.forEach(b => b.classList.toggle('on', parseInt(b.dataset.v, 10) <= pickedStars));
+        };
+      });
+
+      const btnSubmit = document.getElementById('btnSubmitReview');
+      btnSubmit.onclick = async () => {
         const name = document.getElementById('revName').value.trim() || 'Pemain';
         const text = document.getElementById('revText').value.trim();
         if (!text) return alert('Silakan tulis ulasan singkat terlebih dahulu.');
-        const now = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
-        reviews.unshift({ name, stars: pickedStars, text, date: now });
-        localStorage.setItem('sb_lp_reviews', JSON.stringify(reviews));
+
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = 'Mengirim...';
+        await sendToSheet({ type: 'review', name, stars: pickedStars, text });
         document.getElementById('revName').value = '';
         document.getElementById('revText').value = '';
-        if (window.gtag) window.gtag('event', 'submit_review', { stars: pickedStars });
-        renderReviews();
+        await loadGlobalData();
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = 'Kirim Ulasan';
       };
-
-      renderReviews();
     })();
   </script>
 </body>
