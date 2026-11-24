@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stickman Basket — Game Basket Realistis Android</title>
+  <title>Stickman Basket — Game Basket Realistis Android &amp; PC</title>
   <style>
     :root {
       --bg: #08090c;
@@ -57,17 +57,19 @@
     h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 900; line-height: 1.12; margin-bottom: 14px; }
     h1 span { color: var(--gold); }
     .hero p { color: var(--muted); font-size: 15px; margin-bottom: 24px; max-width: 540px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
     .btn-primary {
       background: linear-gradient(135deg, #ff9800, #ffd54f);
-      color: #111; font-weight: 800; padding: 13px 22px; border-radius: 12px;
+      color: #111; font-weight: 800; padding: 13px 20px; border-radius: 12px;
       border: none; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
       box-shadow: 0 8px 24px rgba(255, 179, 0, 0.25);
     }
     .btn-ghost {
       background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border);
-      color: #fff; font-weight: 600; padding: 13px 18px; border-radius: 12px; font-size: 14px;
+      color: #fff; font-weight: 600; padding: 13px 16px; border-radius: 12px; font-size: 14px;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
     }
+    .btn-ghost:hover { border-color: rgba(255, 213, 79, 0.45); color: var(--gold); }
     .hero-badges { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--muted); }
     .hero-badges b { color: #fff; }
 
@@ -150,15 +152,16 @@
     <!-- HERO -->
     <div class="hero">
       <div>
-        <span class="pill">🔥 Versi 1.0 • Gratis &amp; Ringan (~5.9 MB)</span>
+        <span class="pill">🔥 Versi 2.1 • Android &amp; Windows PC • 60 FPS</span>
         <h1>Mainkan <span>Stickman Basket</span> dengan Fisika Realistis!</h1>
         <p>
-          Rasakan sensasi menembak bola basket yang nyata: animasi ambil &amp; lempar bola,
-          Power Shoot, Mode Level Bertahap, hingga Kontes 3-Point 60 detik dengan Money Ball.
+          Rasakan sensasi menembak bola basket yang nyata: kamera dinamis, ring 3D realistis,
+          Power Shoot, Active Defender, Mode Level Bertahap, hingga Kontes 3-Point 60 detik.
         </p>
         <div class="hero-actions">
-          <button class="btn-primary" id="btnDownloadPlay">▶ Unduh APK (v1.0 • 5.9 MB)</button>
-          <a class="btn-ghost" href="#ulasan">⭐ Beri Rating &amp; Ulasan</a>
+          <button class="btn-primary" id="btnDownloadPlay">▶ Unduh APK (v2.1 • 5.9 MB)</button>
+          <button class="btn-ghost" id="btnDownloadPC">💻 Unduh PC (.zip)</button>
+          <a class="btn-ghost" href="#ulasan">⭐ Ulasan</a>
         </div>
         <div class="hero-badges">
           <span>Rating: <b id="heroRating">5.0 ★</b></span>
@@ -178,38 +181,38 @@
           </g>
           <circle cx="54" cy="54" r="28.5" fill="none" stroke="#0D131A" stroke-width="2.8"/>
         </svg>
-        <h3 style="margin-bottom:4px;">Stickman Basket</h3>
+        <h3 style="margin-bottom:4px;">Stickman Basket v2.1</h3>
         <p style="font-size:12px; color:var(--muted);">com.fvamous.stickmanbasket</p>
       </div>
     </div>
 
     <!-- FITUR -->
     <section id="fitur">
-      <h2 class="sec-title">Fitur Unggulan</h2>
+      <h2 class="sec-title">Pembaruan Unggulan v2.1</h2>
       <p class="sec-sub">Dirancang realistis seperti latihan &amp; kontes menembak basket sungguhan.</p>
       <div class="grid-3">
         <div class="card">
-          <h3>🎯 3 Mode Permainan</h3>
-          <p>Mode Level Drills (Paint → 3-Point → Shot Clock), Kontes 3-Point 60 Detik + Money Ball, dan Latihan Bebas.</p>
+          <h3>🎥 Kamera Dinamis &amp; Ring 3D</h3>
+          <p>Ukuran bola &amp; ring 100% konsisten, kamera mengikuti lintasan bola, papan kaca tempered &amp; LED buzzer.</p>
         </div>
         <div class="card">
-          <h3>🔥 Power Shoot &amp; Fisika Nyata</h3>
-          <p>Indikator Sweet Spot dinamis mengikuti jarak tembak, jaring ring berayun, pantulan papan kaca &amp; LED buzzer.</p>
+          <h3>🛡️ Active Defender &amp; Level</h3>
+          <p>Defender melakukan close-out dan melompat memblok di Lv.4+, sistem Nyawa Level, serta Kontes 60 Detik.</p>
         </div>
         <div class="card">
-          <h3>🔊 Audio Indoor &amp; Backsound</h3>
-          <p>Suara pantulan bola kulit di lantai kayu, denting ring besi, sorak penonton saat Swish, plus beat Streetball.</p>
+          <h3>🔊 60 FPS &amp; Audio Indoor</h3>
+          <p>Super mulus di Android &amp; Windows PC, suara pantulan kayu, ring besi, sorak penonton, plus beat Streetball.</p>
         </div>
       </div>
     </section>
 
     <!-- ANALITIK PENGUNJUNG & KLIK UNDUHAN -->
     <section id="analitik">
-      <h2 class="sec-title">📊 Analitik Pengunjung &amp; Unduhan APK</h2>
-      <p class="sec-sub">Angka "Unduhan Global" diambil otomatis dari GitHub Releases, sedangkan log kunjungan mencatat perangkat pengunjung.</p>
+      <h2 class="sec-title">📊 Analitik Pengunjung &amp; Unduhan</h2>
+      <p class="sec-sub">Angka "Unduhan Global" diambil otomatis dari GitHub Releases (Android + PC), sedangkan log mencatat kunjungan perangkat.</p>
 
       <div class="stats-row">
-        <div class="stat-card"><div class="lbl">Unduhan APK (Global)</div><div class="num" id="stGlobalDownloads">0</div></div>
+        <div class="stat-card"><div class="lbl">Total Unduhan (Global)</div><div class="num" id="stGlobalDownloads">0</div></div>
         <div class="stat-card"><div class="lbl">Kunjungan Sesi Ini</div><div class="num" id="stViews">0</div></div>
         <div class="stat-card"><div class="lbl">Pengunjung Android</div><div class="num" id="stAndroid">0</div></div>
         <div class="stat-card"><div class="lbl">Pengunjung Desktop</div><div class="num" id="stDesktop">0</div></div>
@@ -277,8 +280,9 @@
 
   <script>
     (() => {
-      // Link langsung APK GitHub Release v1.0
-      const DOWNLOAD_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v1.0/app-debug.apk';
+      // Link langsung GitHub Release v2.1 (Android & PC)
+      const DOWNLOAD_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v2.1/app-debug.apk';
+      const DOWNLOAD_PC_URL = 'https://github.com/fvamous/stickman-basket-web/releases/download/v2.1/StickmanBasket-PC-v2.1.zip';
       const GITHUB_API_RELEASES = 'https://api.github.com/repos/fvamous/stickman-basket-web/releases';
       const GA4_ID = ''; // Opsional: isi ID Google Analytics 4 ('G-XXXXXXXXXX')
 
@@ -293,7 +297,7 @@
         window.gtag('config', GA4_ID);
       }
 
-      // Ambil total unduhan APK asli secara global dari GitHub Releases API
+      // Ambil total unduhan APK + PC asli secara global dari GitHub Releases API
       fetch(GITHUB_API_RELEASES)
         .then(r => r.ok ? r.json() : [])
         .then(releases => {
@@ -357,10 +361,17 @@
         window.location.href = DOWNLOAD_URL;
       };
 
+      document.getElementById('btnDownloadPC').onclick = () => {
+        analytics.clicks++;
+        addLog('Klik Unduh PC (.zip)');
+        if (window.gtag) window.gtag('event', 'download_pc_click', { device: dev.label });
+        window.location.href = DOWNLOAD_PC_URL;
+      };
+
       // Sistem Rating & Ulasan
       const defaultReviews = [
         { name: 'Rizky Pratama', stars: 5, text: 'Fisika lemparannya realistis, suara pantulan bolanya terasa nyata banget!', date: 'Baru saja' },
-        { name: 'Dimas A.', stars: 5, text: 'Mode 3-Point Contest dan Power Shoot-nya seru, ringan di HP Android.', date: 'Hari ini' }
+        { name: 'Dimas A.', stars: 5, text: 'Update v2.1 makin mulus 60 FPS di HP dan ada penjaganya yang menantang!', date: 'Hari ini' }
       ];
       let reviews = JSON.parse(localStorage.getItem('sb_lp_reviews') || 'null') || defaultReviews;
       let pickedStars = 5;
